@@ -2,32 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@property --bg-rotation {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
+.splash-screen {
+  background-color: #4158d0;
+  background-image: linear-gradient(var(--bg-rotation), #4158d0 0%, #d145ea 48%, #9270ff 100%);
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
+  /* background: linear-gradient(
+      rgba(255, 0, 0, 1) 0%,
+      rgba(255, 154, 0, 1) 10%,
+      rgba(208, 222, 33, 1) 20%,
+      rgba(79, 220, 74, 1) 30%,
+      rgba(63, 218, 216, 1) 40%,
+      rgba(47, 201, 226, 1) 50%,
+      rgba(28, 127, 238, 1) 60%,
+      rgba(95, 21, 242, 1) 70%,
+      rgba(186, 12, 248, 1) 80%,
+      rgba(251, 7, 217, 1) 90%,
+      rgba(255, 0, 0, 1) 100%
     )
-    rgb(var(--background-start-rgb));
-}
+    0 0/100% 200%; */
+  animation: a 5s ease-in-out infinite;
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  background: linear-gradient(
+      var(--bg-rotation),
+      rgba(196, 69, 69, 1) 9.2%,
+      rgba(255, 167, 73, 0.82) 25%,
+      rgba(253, 217, 82, 0.82) 43.4%,
+      rgba(107, 225, 108, 0.82) 58.2%,
+      rgba(107, 169, 225, 0.82) 75.1%,
+      rgba(153, 41, 243, 0.82) 87.3%
+    )
+    0 0 / 200% 200%;
+
+  .big-image {
+    filter: drop-shadow(0 0 2px white) drop-shadow(1px 0 1px white) drop-shadow(0 1px 1px white)
+      drop-shadow(-1px 0 1px white) drop-shadow(0 -1px 1px white);
   }
 }
+
+@keyframes a {
+  0% {
+    --bg-rotation: 0deg;
+    background-position: 0 0;
+  }
+  50% {
+    --bg-rotation: 180deg;
+    background-position: 100% 100%;
+  }
+  100% {
+    --bg-rotation: 0deg;
+    background-position: 0 0;
+  }
+}
+/* 
+@keyframes a {
+  0% {
+    --bg-rotation: 24deg;
+  }
+  50% {
+    --bg-rotation: 90deg;
+  }
+  100% {
+    --bg-rotation: 180deg;
+  }
+} */
