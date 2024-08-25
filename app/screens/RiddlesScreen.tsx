@@ -1,10 +1,13 @@
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useRiddles } from '../context';
 import classNames from 'classnames';
+import JSConfetti from 'js-confetti';
 
 export const RiddlesScreen = () => {
   const { riddles, currentRiddleIndex, setCurrentRiddleIndex, goToEnd, isLastRiddle } =
     useRiddles();
+
+  // const confetti = useMemo(() => new JSConfetti(), []);
 
   const [error, setError] = useState<string | null>(null);
   const [errorCount, setErrorCount] = useState(0);
@@ -13,6 +16,7 @@ export const RiddlesScreen = () => {
   const { riddle, answer, room } = riddles[currentRiddleIndex] ?? {};
 
   const handleOnSubmit = () => {
+    // confetti.addConfetti();
     const input = inputRef.current;
     if (!input) return;
 
