@@ -10,7 +10,7 @@ export const RiddlesScreen = () => {
   const [errorCount, setErrorCount] = useState(0);
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const { riddle, answer } = riddles[currentRiddleIndex] ?? {};
+  const { riddle, answer, room } = riddles[currentRiddleIndex] ?? {};
 
   const handleOnSubmit = () => {
     const input = inputRef.current;
@@ -36,7 +36,7 @@ export const RiddlesScreen = () => {
   };
 
   return (
-    <div className="riddles-screen h-full flex flex-col justify-center text-2xl">
+    <div className="riddles-screen relative h-full flex flex-col justify-center text-2xl p-6">
       <div className="flex flex-col items-center justify-center gap-4 flex-1">
         <div className="flex flex-col gap-4 text-shadow-white text-3xl font-bold text-center">
           {riddle}
@@ -66,6 +66,15 @@ export const RiddlesScreen = () => {
         >
           GO
         </button>
+      </div>
+
+      <div
+        className="new-room p-10 bg-white rounded-lg shadow-md text-center flex flex-col"
+        key={room}
+      >
+        <p className="text-gray-600">New room unlocked!</p>
+        <p className="text-5xl mt-6">{room}</p>
+        <p className="text-lg text-gray-400">(go there)</p>
       </div>
     </div>
   );

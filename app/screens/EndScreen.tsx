@@ -1,11 +1,11 @@
 export const EndScreen = () => {
   return (
-    <div className="end-screen h-full flex flex-col gap-4 text-shadow-white justify-center">
-      <h1 className="text-5xl font-bold text-center">Congratulations!</h1>
+    <div className="end-screen h-full flex flex-col gap-4 text-shadow-white justify-center p-6">
+      <h1 className="text-4xl font-bold text-center">Congratulations!</h1>
       <p className="text-2xl font-bold text-center">
         You have completed the qwest and have earned a
       </p>
-      <div className="relative py-12 text-6xl">
+      <div className="relative py-12 text-5xl">
         <p className=" text-center font-bold z-0 absolute w-full rainbow-stroke tracking-widest">
           ANYTHING COUPON
         </p>

@@ -162,3 +162,31 @@ main {
 .wrong-answer {
   animation: shake 0.5s;
 }
+
+.new-room {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: room 5s ease-in-out forwards;
+}
+
+@keyframes room {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 50%);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, -35%);
+  }
+  85% {
+    opacity: 1;
+    transform: translate(-50%, -55%);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -150%);
+  }
+}

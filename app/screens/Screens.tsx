@@ -9,7 +9,7 @@ export const Screens = () => {
   const { currentScreen } = useRiddles();
 
   return (
-    <div className="all-screens min-h-screen h-full p-6">
+    <div className="all-screens h-full">
       {currentScreen === 'splash' && <SplashScreen />}
       {currentScreen === 'riddles' && <RiddlesScreen />}
       {currentScreen === 'end' && <EndScreen />}

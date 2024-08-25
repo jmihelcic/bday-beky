@@ -31,7 +31,7 @@ export const useRiddles = () => {
 };
 
 export const RiddlesProvider = (props: PropsWithChildren) => {
-  const [currentScreen, setCurrentScreen] = useState('splash');
+  const [currentScreen, setCurrentScreen] = useState('end');
   const [currentRiddleIndex, setCurrentRiddleIndex] = useState(0);
 
   const contextValue = {
