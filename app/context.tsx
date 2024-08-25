@@ -1,63 +1,45 @@
-import { createContext, PropsWithChildren, useContext, useState } from 'react';
-
-const riddles = [
-  {
-    id: 0,
-    question: <div>Quesiton 1</div>,
-    hint: `hint 1`,
-    answer: `answer 1`,
-  },
-  {
-    id: 1,
-    question: <div>Quesiton 2</div>,
-    hint: `hint 2`,
-    answer: `answer 2`,
-  },
-  {
-    id: 2,
-    question: <div>Quesiton 3</div>,
-    hint: `hint 3`,
-    answer: `answer 3`,
-  },
-  {
-    id: 3,
-    question: <div>Quesiton 4</div>,
-    hint: `hint 4`,
-    answer: `answer 4`,
-  },
-  {
-    id: 4,
-    question: <div>Quesiton 5</div>,
-    hint: `hint 5`,
-    answer: `answer 5`,
-  },
-];
+import { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
+import { riddles } from './_data/riddles';
 
 export const RiddlesContext = createContext<{
   riddles: typeof riddles;
+  currentRiddleIndex: number;
   currentScreen: string;
   setCurrentScreen: (screen: string) => void;
+  setCurrentRiddleIndex: (index: number) => void;
 } | null>(null);
 export default RiddlesContext;
 
 export const useRiddles = () => {
-  const { riddles, currentScreen, setCurrentScreen } = useContext(RiddlesContext)!;
+  const { riddles, currentRiddleIndex, currentScreen, setCurrentScreen, setCurrentRiddleIndex } =
+    useContext(RiddlesContext)!;
 
   const goToRiddles = () => setCurrentScreen('riddles');
+  const goToEnd = () => setCurrentScreen('end');
+  const isLastRiddle = currentRiddleIndex === riddles.length - 1;
 
-  return { riddles, currentScreen, setCurrentScreen, goToRiddles };
+  return {
+    riddles,
+    currentRiddleIndex,
+    currentScreen,
+    setCurrentScreen,
+    setCurrentRiddleIndex,
+    goToRiddles,
+    goToEnd,
+    isLastRiddle,
+  };
 };
 
 export const RiddlesProvider = (props: PropsWithChildren) => {
   const [currentScreen, setCurrentScreen] = useState('splash');
+  const [currentRiddleIndex, setCurrentRiddleIndex] = useState(0);
 
   const contextValue = {
     riddles,
+    currentRiddleIndex,
     currentScreen,
-    setCurrentScreen: (value: string) => {
-      console.log('setting screen to', value);
-      setCurrentScreen('riddles');
-    },
+    setCurrentScreen,
+    setCurrentRiddleIndex,
   };
 
   return <RiddlesContext.Provider value={contextValue}>{props.children}</RiddlesContext.Provider>;

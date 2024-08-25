@@ -1,25 +1,32 @@
 import { useRef, useState } from 'react';
 import { useRiddles } from '../context';
+import classNames from 'classnames';
 
 export const RiddlesScreen = () => {
-  const { riddles } = useRiddles();
-  const [currentRiddleIndex, setCurrentRiddleIndex] = useState(0);
+  const { riddles, currentRiddleIndex, setCurrentRiddleIndex, goToEnd, isLastRiddle } =
+    useRiddles();
+
   const [error, setError] = useState<string | null>(null);
   const [errorCount, setErrorCount] = useState(0);
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const { id, question, hint, answer } = riddles[currentRiddleIndex];
+  const { riddle, answer } = riddles[currentRiddleIndex] ?? {};
 
   const handleOnSubmit = () => {
     const input = inputRef.current;
     if (!input) return;
 
-    const userAnswer = input.value.trim().toLowerCase();
+    const userAnswer = input.value.trim().toLowerCase().replaceAll(' ', '');
+    const riddleAnswer = answer.trim().toLowerCase().replaceAll(' ', '');
 
-    if (userAnswer === answer.trim().toLowerCase()) {
+    if (userAnswer === riddleAnswer) {
       // alert(hint);
       setError(null);
       setErrorCount(0);
+      if (isLastRiddle) {
+        goToEnd();
+        return;
+      }
       setCurrentRiddleIndex(currentRiddleIndex + 1);
       input.value = '';
     } else {
@@ -29,24 +36,35 @@ export const RiddlesScreen = () => {
   };
 
   return (
-    <div className="riddles">
-      <div className="flex flex-col items-center gap-4">
-        {/* <Image src="/riddle.png" width={200} height={200} /> */}
-        <h1 className="text-2xl font-bold">Riddle #{id + 1}</h1>
-        <div className="text-lg">{question}</div>
-        {error && <p className="text-red-500">{error}</p>}
-        {errorCount > 3 && <p className="text-orange-500">{hint}</p>}
+    <div className="riddles-screen h-full flex flex-col justify-center text-2xl">
+      <div className="flex flex-col items-center justify-center gap-4 flex-1">
+        <div className="flex flex-col gap-4 text-shadow-white text-3xl font-bold text-center">
+          {riddle}
+        </div>
       </div>
 
-      <div className="flex flex-col items-center gap-4">
+      <div className="h-20">
+        {error && <div className="text-red-500 text-shadow-white text-center p-4">{error}</div>}
+      </div>
+
+      <div className="flex flex-row items-center gap-3">
         <input
+          key={errorCount}
           ref={inputRef}
           type="text"
-          placeholder="Answer"
-          className="p-2 border border-gray-300 rounded-md"
+          placeholder="What could it be?"
+          className={classNames(
+            'px-4 h-14 leading-[56px] border-4 border-black rounded-lg focus:outline-none text-xl flex-1',
+            { 'wrong-answer': error !== null }
+          )}
         />
-        <button className="p-2 bg-blue-500 text-white rounded-md" onClick={handleOnSubmit}>
-          Submit!
+        <button
+          className={classNames(
+            'h-14 w-14 leading-[56px] bg-black text-white rounded-md flex-shrink-0'
+          )}
+          onClick={handleOnSubmit}
+        >
+          GO
         </button>
       </div>
     </div>

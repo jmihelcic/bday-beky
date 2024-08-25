@@ -8,7 +8,50 @@
   inherits: false;
 }
 
-.splash-screen {
+html,
+body,
+main {
+  min-height: 100dvh;
+  height: 100%;
+}
+
+.rainbow-text {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
+  color: transparent;
+  animation: rainbow 10s linear infinite;
+  background-size: 400% 400%;
+}
+
+.rainbow-stroke {
+  -webkit-text-stroke: 6px black;
+}
+
+.no-stroke {
+  -webkit-text-stroke: 0;
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 25%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.text-shadow-white {
+  /* text-shadow: 0 0 12px white, 3px 0 0px white, 0 3px 0px white, -3px 0 0px white, 0 -3px 0px white;
+   */
+  -webkit-text-stroke: 4px white;
+  paint-order: stroke fill;
+}
+
+.all-screens {
   background-color: #4158d0;
   background-image: linear-gradient(var(--bg-rotation), #4158d0 0%, #d145ea 48%, #9270ff 100%);
 
@@ -26,7 +69,7 @@
       rgba(255, 0, 0, 1) 100%
     )
     0 0/100% 200%; */
-  animation: a 5s ease-in-out infinite;
+  animation: a 25s ease-in-out infinite;
 
   background: linear-gradient(
       var(--bg-rotation),
@@ -50,9 +93,17 @@
     --bg-rotation: 0deg;
     background-position: 0 0;
   }
+  25% {
+    --bg-rotation: 25deg;
+    background-position: 50% 0;
+  }
   50% {
-    --bg-rotation: 180deg;
-    background-position: 100% 100%;
+    --bg-rotation: -5deg;
+    background-position: 90% 90%;
+  }
+  75% {
+    --bg-rotation: 34deg;
+    background-position: 0 50%;
   }
   100% {
     --bg-rotation: 0deg;
@@ -71,3 +122,43 @@
     --bg-rotation: 180deg;
   }
 } */
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+.wrong-answer {
+  animation: shake 0.5s;
+}
